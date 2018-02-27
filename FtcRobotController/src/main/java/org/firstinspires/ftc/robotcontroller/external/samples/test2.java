@@ -42,6 +42,8 @@ public class test2 extends OpMode {
     private OpticalDistanceSensor ods;
     private Gyroscope gyro;
     private CompassSensor cmp;
+    int poz=0;
+    float v[]={0,0.4f,0.8f};
     VuforiaLocalizer vuforia;
     OpenGLMatrix pose;
     int cameraMonitorViewId;
