@@ -1,4 +1,6 @@
 package org.firstinspires.ftc.robotcontroller.external.samples;
+
+
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -40,10 +42,9 @@ public class test2 extends OpMode {
     private HardwarePushbot robot;
     private ColorSensor sc;
     private OpticalDistanceSensor ods;
-    private Gyroscope gyro;
-    private CompassSensor cmp;
+   // private CompassSensor cmp;
     int poz=0;
-    float v[]={0,0.4f,0.8f};
+    float v1[]={0.63f,0.5f,0f},v2[]={0.37f,0.5f,1f};
     VuforiaLocalizer vuforia;
     OpenGLMatrix pose;
     int cameraMonitorViewId;
@@ -56,14 +57,13 @@ public class test2 extends OpMode {
         initPose();
         timp = new ElapsedTime();
         robot =  new HardwarePushbot();
+        poz=0;
 
-        gyro = hardwareMap.get(Gyroscope.class,"gyro");
 
-
-        cmp = hardwareMap.get(CompassSensor.class,"cmp");
-        cmp.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
-        ods = hardwareMap.get(OpticalDistanceSensor.class, "ods");
-        ods.enableLed(true);
+        /*cmp = hardwareMap.get(CompassSensor.class,"cmp");
+        cmp.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);*/
+        /*ods = hardwareMap.get(OpticalDistanceSensor.class, "ods");
+        ods.enableLed(true);*/
         sc = hardwareMap.get(ColorSensor.class, "sc");
         sc.enableLed(true);
         robot.init(hardwareMap);
@@ -103,9 +103,9 @@ public class test2 extends OpMode {
             robot.mbr.setPower(0);
         }
         if(gamepad1.x)
-            robot.sb.setPosition(0.9);
+            robot.sb.setPosition(0.8);
         if(gamepad1.y)
-            robot.sb.setPosition(0.1);
+            robot.sb.setPosition(0.2);
         if(gamepad1.right_trigger!=0)
         {
             robot.mcl.setPower(gamepad1.right_trigger);
@@ -122,14 +122,36 @@ public class test2 extends OpMode {
             robot.mcr.setPower(0);
         }
         if(gamepad1.right_bumper)
-            robot.sf.setPosition(Math.min(1,robot.sf.getPosition()+0.01));
+            robot.sf.setPosition(Math.min(1,robot.sf.getPosition()+0.05));
         else if(gamepad1.left_bumper)
-            robot.sf.setPosition(Math.max(0,robot.sf.getPosition()-0.01));
+            robot.sf.setPosition(Math.max(0,robot.sf.getPosition()-0.05));
 
-        if(gamepad1.dpad_up)
-            robot.up1.setServoPosition(1,robot.up1.getServoPosition(1)+0.01);
+        if( gamepad1.dpad_up)
+            poz = 2;
         else if(gamepad1.dpad_down)
-            robot.up1.setServoPosition(1,robot.up1.getServoPosition(1)-0.01);
+            poz = 0;
+        else if(gamepad1.dpad_right)
+            poz = 1;
+        /*if(gamepad1.dpad_up)
+        {
+            robot.up1.setPosition(robot.up1.getPosition()+0.01);
+            robot.up2.setPosition(robot.up2.getPosition()-0.01);
+        }
+         else if(gamepad1.dpad_down)
+        {
+            robot.up1.setPosition(robot.up1.getPosition()-0.01);
+            robot.up2.setPosition(robot.up2.getPosition()+0.01);
+        }*/
+        robot.up1.setPosition(v1[poz]);
+        robot.up2.setPosition(v2[poz]);
+        if(gamepad1.a)
+            robot.mr.setPower(0.3f);
+        else if(gamepad1.b)
+            robot.mr.setPower(-0.3f);
+        else  robot.mr.setPower(0);
+        telemetry.addData("Pos1:",robot.up1.getPosition());
+        telemetry.addData("Pos2:",robot.up2.getPosition());
+        telemetry.addData("Poz::",poz);
 
         robot.mr.setPower(gamepad1.right_stick_y);
         if(sc.red() > 15 && sc.red() > sc.blue()){
@@ -138,9 +160,9 @@ public class test2 extends OpMode {
         else if(sc.blue() > 15 && sc.blue() > sc.red())
             robot.sb.setPosition(1);
         telemetry.addData("Pose:",vuMark);
-        OpticalDistanceSensor();
-        CompassSensor();
-        GyroSensor();
+       // OpticalDistanceSensor();
+       // CompassSensor();
+        //GyroSensor();
 
         telemetry.update();
     }
@@ -202,19 +224,17 @@ public class test2 extends OpMode {
                 }
             }
     }
-    private void OpticalDistanceSensor()
+    /*private void OpticalDistanceSensor()
     {
         telemetry.addData("Normal: ", ods.getLightDetected());
         telemetry.addData("Raw: ", ods.getRawLightDetected());
         telemetry.addData("RawMax: ", ods.getRawLightDetectedMax());
-
-
-    }
-    private void CompassSensor()
+    }*/
+   /* private void CompassSensor()
     {
         telemetry.addData("Direction",cmp.getDirection());
     }
-    private void GyroSensor()
+   /* private void GyroSensor()
     {
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(2);
@@ -222,5 +242,5 @@ public class test2 extends OpMode {
         AngularVelocity av = gyro.getAngularVelocity(AngleUnit.DEGREES);
         String toPrint = df.format(av.xRotationRate) + " " + df.format(av.yRotationRate) + " " + df.format(av.zRotationRate);
         telemetry.addData("Gyro:", toPrint);
-    }
+    }*/
 }

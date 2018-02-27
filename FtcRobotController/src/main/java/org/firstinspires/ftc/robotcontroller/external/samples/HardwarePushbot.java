@@ -66,7 +66,7 @@ public class HardwarePushbot
     public DcMotor mr = null;
     public Servo  sb = null;
     public Servo  sf = null;
-    public ServoController up1=null;
+    public Servo up1=null;
     public Servo up2=null;
 
 
@@ -89,7 +89,7 @@ public class HardwarePushbot
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        /*mfl  = hwMap.get(DcMotor.class, "mfl");
+        mfl  = hwMap.get(DcMotor.class, "mfl");
         mfr = hwMap.get(DcMotor.class, "mfr");
         mbl = hwMap.get(DcMotor.class, "mbl");
         mbr = hwMap.get(DcMotor.class,  "mbr");
@@ -127,10 +127,12 @@ public class HardwarePushbot
         sb  = hwMap.get(Servo.class, "sb");
         sb.setPosition(0.1);
         sf = hwMap.get(Servo.class,"sf");
-        sf.setPosition(0.1);*/
+        sf.setPosition(0.3);
 
-        up1= hwMap.get(ServoController.class,"up1");
-        up1.setServoPosition(1,0.5);
+        up1= hwMap.get(Servo.class,"up1");
+        up1.setPosition(0.63);
+        up2= hwMap.get(Servo.class,"up2");
+        up2.setPosition(0.37);
         //Sensors
 
 
