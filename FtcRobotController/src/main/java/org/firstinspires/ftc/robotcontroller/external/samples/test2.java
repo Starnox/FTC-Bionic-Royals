@@ -40,8 +40,6 @@ import java.text.DecimalFormat;
 public class test2 extends OpMode {
     private ElapsedTime timp;
     private HardwarePushbot robot;
-    private ColorSensor sc;
-    private OpticalDistanceSensor ods;
    // private CompassSensor cmp;
     int poz=0;
     float v1[]={0.63f,0.5f,0f},v2[]={0.37f,0.5f,1f};
@@ -64,8 +62,6 @@ public class test2 extends OpMode {
         cmp.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);*/
         /*ods = hardwareMap.get(OpticalDistanceSensor.class, "ods");
         ods.enableLed(true);*/
-        sc = hardwareMap.get(ColorSensor.class, "sc");
-        sc.enableLed(true);
         robot.init(hardwareMap);
         telemetry.addData("Say", "test");
     }
@@ -153,12 +149,6 @@ public class test2 extends OpMode {
         telemetry.addData("Pos2:",robot.up2.getPosition());
         telemetry.addData("Poz::",poz);
 
-        robot.mr.setPower(gamepad1.right_stick_y);
-        if(sc.red() > 15 && sc.red() > sc.blue()){
-            robot.sb.setPosition(0.4);
-        }
-        else if(sc.blue() > 15 && sc.blue() > sc.red())
-            robot.sb.setPosition(1);
         telemetry.addData("Pose:",vuMark);
        // OpticalDistanceSensor();
        // CompassSensor();

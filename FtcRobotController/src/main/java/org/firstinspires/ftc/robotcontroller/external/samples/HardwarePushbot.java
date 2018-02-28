@@ -30,8 +30,10 @@
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.CompassSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gyroscope;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoController;
@@ -68,6 +70,9 @@ public class HardwarePushbot
     public Servo  sf = null;
     public Servo up1=null;
     public Servo up2=null;
+    public ColorSensor sc=null;
+    public CompassSensor cmp = null;
+    public Gyroscope gyro = null;
 
 
     public static final double MID_SERVO       =  0.5 ;
@@ -134,8 +139,11 @@ public class HardwarePushbot
         up2= hwMap.get(Servo.class,"up2");
         up2.setPosition(0.37);
         //Sensors
-
-
+        sc= hwMap.get(ColorSensor.class,"sc");
+        sc.enableLed(true);
+        cmp = hwMap.get(CompassSensor.class,"cmp");
+        cmp.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
+        gyro =  hwMap.get(Gyroscope.class,"gyro");
 
     }
  }
