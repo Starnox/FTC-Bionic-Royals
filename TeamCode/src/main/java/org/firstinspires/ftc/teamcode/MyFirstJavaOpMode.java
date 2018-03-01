@@ -177,20 +177,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
         robot.mfr.setPower(0);
         sleep(200);
     }
-    /*public void rotate_left(float x)
-    {
-        float direction = (float)robot.cmp.getDirection();
-        robot.mbl.setPower(0.5f);
-        robot.mfl.setPower(0.5f);
-        robot.mbr.setPower(-0.5f);
-        robot.mfr.setPower(-0.5f);
-        while((direction-x)<(float)robot.cmp.getDirection())
-            sleep(1);
-        robot.mbl.setPower(0);
-        robot.mfl.setPower(0);
-        robot.mbr.setPower(0);
-        robot.mfr.setPower(0);
-    }*/
+
 }
 
 
