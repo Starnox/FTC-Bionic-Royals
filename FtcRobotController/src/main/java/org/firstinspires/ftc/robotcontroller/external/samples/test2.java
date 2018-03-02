@@ -102,7 +102,7 @@ public class test2 extends OpMode {
         if(gamepad1.x)
             robot.sb.setPosition(0.8);
         if(gamepad1.y)
-            robot.sb.setPosition(0.2);
+            robot.sb.setPosition(0.1);
         if(gamepad1.right_trigger!=0)
         {
             robot.mcl.setPower(gamepad1.right_trigger);
