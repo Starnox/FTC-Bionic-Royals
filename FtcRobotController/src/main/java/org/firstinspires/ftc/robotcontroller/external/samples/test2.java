@@ -42,7 +42,7 @@ public class test2 extends OpMode {
     private HardwarePushbot robot;
    // private CompassSensor cmp;
     int poz=0;
-    float v1[]={0.63f,0.5f,0f},v2[]={0.37f,0.5f,1f};
+    float v1[]={0.71f,0.56f,0f},v2[]={0.29f,0.44f,1f};
     VuforiaLocalizer vuforia;
     OpenGLMatrix pose;
     int cameraMonitorViewId;
@@ -57,12 +57,13 @@ public class test2 extends OpMode {
         robot =  new HardwarePushbot();
         poz=0;
 
-
         /*cmp = hardwareMap.get(CompassSensor.class,"cmp");
         cmp.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);*/
         /*ods = hardwareMap.get(OpticalDistanceSensor.class, "ods");
         ods.enableLed(true);*/
         robot.init(hardwareMap);
+        robot.up1.setPosition(0.);
+        robot.up2.setPosition(1);
         telemetry.addData("Say", "test");
     }
 
@@ -128,7 +129,8 @@ public class test2 extends OpMode {
             poz = 0;
         else if(gamepad1.dpad_right)
             poz = 1;
-        /*if(gamepad1.dpad_up)
+
+       /* if(gamepad1.dpad_up)
         {
             robot.up1.setPosition(robot.up1.getPosition()+0.01);
             robot.up2.setPosition(robot.up2.getPosition()-0.01);

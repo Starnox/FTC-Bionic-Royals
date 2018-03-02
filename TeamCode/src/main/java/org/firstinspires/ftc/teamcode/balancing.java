@@ -19,7 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 /**
  * Created by Alex on 1/10/2018.
  */
-@Autonomous(name="MyFirstJavaOpMode", group="Linear Opmode")
+@Autonomous(name="balancing", group="Linear Opmode")
 public class balancing extends LinearOpMode {
     private HardwarePushbot robot;
     private int dir,x,y;
@@ -34,9 +34,9 @@ public class balancing extends LinearOpMode {
         while (opModeIsActive())
         {
             if (gamepad1.dpad_up)
-                x++;
-            else if (gamepad2.dpad_down)
-                x--;
+            x++;
+        else if (gamepad1.dpad_down)
+            x--;
             if (gamepad1.dpad_right)
                 y++;
             else if (gamepad1.dpad_left)
@@ -55,8 +55,8 @@ public class balancing extends LinearOpMode {
                     ok = true;
                 }
             } else ok = false;
-            telemetry.addData("Fata:",x);
-            telemetry.addData("Spate:",y);
+            telemetry.addData("Fata:",x/1000);
+            telemetry.addData("Spate:",y/1000);
             telemetry.addData(dir==0?"in spate":"in fata",0);
             telemetry.update();
         }
@@ -67,7 +67,7 @@ public class balancing extends LinearOpMode {
         robot.mbr.setPower(-0.5f);
         robot.mfr.setPower(-0.5f);
         robot.mfl.setPower(-0.5f);
-        sleep(x);
+        sleep(x/1000);
         robot.mbl.setPower(0);
         robot.mbr.setPower(0);
         robot.mfr.setPower(0);
@@ -77,7 +77,7 @@ public class balancing extends LinearOpMode {
         robot.mbr.setPower(0.5f);
         robot.mfr.setPower(0.5f);
         robot.mfl.setPower(0.5f);
-        sleep(y);
+        sleep(y/1000);
         robot.mbl.setPower(0);
         robot.mbr.setPower(0);
         robot.mfr.setPower(0);
@@ -90,7 +90,7 @@ public class balancing extends LinearOpMode {
         robot.mbr.setPower(0.5f);
         robot.mfr.setPower(0.5f);
         robot.mfl.setPower(0.5f);
-        sleep(y);
+        sleep(y/1000);
         robot.mbl.setPower(0);
         robot.mbr.setPower(0);
         robot.mfr.setPower(0);
@@ -100,7 +100,7 @@ public class balancing extends LinearOpMode {
         robot.mbr.setPower(-0.5f);
         robot.mfr.setPower(-0.5f);
         robot.mfl.setPower(-0.5f);
-        sleep(x);
+        sleep(x/1000);
         robot.mbl.setPower(0);
         robot.mbr.setPower(0);
         robot.mfr.setPower(0);

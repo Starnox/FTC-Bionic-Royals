@@ -36,6 +36,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptNullOp;
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptVuMarkIdentification;
+import org.firstinspires.ftc.robotcontroller.external.samples.SensorColor;
+import org.firstinspires.ftc.robotcontroller.external.samples.SensorMRColor;
 import org.firstinspires.ftc.robotcontroller.external.samples.SensorMRCompass;
 import org.firstinspires.ftc.robotcontroller.external.samples.test2;
 
@@ -71,6 +73,6 @@ public class FtcOpModeRegister implements OpModeRegister {
          */
         manager.register("SensorMRCompass", SensorMRCompass.class);
         manager.register("test2", test2.class);
-        manager.register("ConceptVuMarkIdentification",ConceptVuMarkIdentification.class);
+        manager.register("SensorMRColor",SensorMRColor.class);
     }
 }

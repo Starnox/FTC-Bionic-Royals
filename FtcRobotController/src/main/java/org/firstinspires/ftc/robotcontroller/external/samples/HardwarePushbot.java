@@ -135,9 +135,9 @@ public class HardwarePushbot
         sf.setPosition(0.3);
 
         up1= hwMap.get(Servo.class,"up1");
-        up1.setPosition(0.63);
+       // up1.setPosition(0.63);
         up2= hwMap.get(Servo.class,"up2");
-        up2.setPosition(0.37);
+        //up2.setPosition(0.37);
         //Sensors
         sc= hwMap.get(ColorSensor.class,"sc");
         sc.enableLed(true);
