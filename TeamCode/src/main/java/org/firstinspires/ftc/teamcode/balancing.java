@@ -29,6 +29,7 @@ public class balancing extends LinearOpMode {
         robot.init(hardwareMap);
         x=0;
         y=0;
+        robot.sb.setPosition(1f);
         waitForStart();
         while (opModeIsActive())
         {
