@@ -67,8 +67,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
             telemetry.addData("Const:",const1);
             telemetry.update();
         */
-        robot.sb.setPosition(1f);
-        sleep(2000);
+
         push_blue();
         move_front(85);
         rotate_left(90);
@@ -80,6 +79,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 
     void push_blue()
     {
+        robot.sb.setPosition(1f);
+        sleep(2000);
         if(robot.sc.red()>robot.sc.blue())
         {
             telemetry.addData("ROSU:",robot.sc.red() + " " + robot.sc.blue());
@@ -103,6 +104,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
     }
     void push_red()
     {
+        robot.sb.setPosition(1f);
+        sleep(2000);
         if(robot.sc.red()<robot.sc.blue())
         {
             telemetry.addData("ALBASTRU:",robot.sc.red() + " " + robot.sc.blue());
