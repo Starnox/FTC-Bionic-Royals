@@ -69,6 +69,17 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
         */
         robot.sb.setPosition(1f);
         sleep(2000);
+        push_blue();
+        move_front(85);
+        rotate_left(90);
+        move_back(10);
+        stop();
+        }
+
+    }
+
+    void push_blue()
+    {
         if(robot.sc.red()>robot.sc.blue())
         {
             telemetry.addData("ROSU:",robot.sc.red() + " " + robot.sc.blue());
@@ -89,13 +100,31 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
             robot.sb.setPosition(0.1f);
             sleep(1000);
         }
-        move_front(85);
-        rotate_left(90);
-        move_back(10);
-        stop();
+    }
+    void push_red()
+    {
+        if(robot.sc.red()<robot.sc.blue())
+        {
+            telemetry.addData("ALBASTRU:",robot.sc.red() + " " + robot.sc.blue());
+            telemetry.update();
+            balance_fata(70);
+            balance_spate(170);
+            sleep(1000);
+            robot.sb.setPosition(0.1f);
+            sleep(1000);
+        }
+        else
+        {
+            telemetry.addData("ROSU:",robot.sc.red() + " " + robot.sc.blue());
+            telemetry.update();
+            balance_spate(170);
+            balance_fata(70);
+            sleep(1000);
+            robot.sb.setPosition(0.1f);
+            sleep(1000);
         }
     }
-    public void move_front(float x)
+     void move_front(float x)
     {
         robot.mbl.setPower(-0.5f);
         robot.mbr.setPower(-0.5f);
@@ -108,7 +137,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
         robot.mfl.setPower(0);
         sleep(200);
     }
-    public void move_back(float x)
+     void move_back(float x)
     {
         robot.mbl.setPower(0.5f);
         robot.mbr.setPower(0.5f);
@@ -122,7 +151,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
         sleep(200);
     }
 
-    public void rotate_right(float x)
+     void rotate_right(float x)
     {
         robot.mbl.setPower(-0.2f);
         robot.mfl.setPower(-0.2f);
@@ -136,7 +165,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
         robot.mfr.setPower(0);
         sleep(500);
     }
-    public void rotate_left(float x)
+     void rotate_left(float x)
     {
         robot.mbl.setPower(0.2f);
         robot.mfl.setPower(0.2f);
@@ -149,7 +178,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
         robot.mfr.setPower(0);
         sleep(500);
     }
-    public void balance_fata(int x)
+     void balance_fata(int x)
     {
         robot.mbl.setPower(-0.5f);
         robot.mbr.setPower(-0.5f);
@@ -162,7 +191,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
         robot.mfl.setPower(0);
         sleep(500);
     }
-    public void balance_spate(int x)
+     void balance_spate(int x)
     {
         robot.mbl.setPower(0.5f);
         robot.mbr.setPower(0.5f);
