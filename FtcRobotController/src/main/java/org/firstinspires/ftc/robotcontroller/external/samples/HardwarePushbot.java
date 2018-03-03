@@ -126,13 +126,12 @@ public class HardwarePushbot
         mbr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         mcr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         mcl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        mr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
+        mr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         // Define and initialize ALL installed servos.
         sb  = hwMap.get(Servo.class, "sb");
         sb.setPosition(0.1);
         sf = hwMap.get(Servo.class,"sf");
-        sf.setPosition(0.3);
+        sf.setPosition(1);
 
         up1= hwMap.get(Servo.class,"up1");
        // up1.setPosition(0.63);

@@ -94,7 +94,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
         move_back(10);
         stop();
         }
-
     }
     public void move_front(float x)
     {

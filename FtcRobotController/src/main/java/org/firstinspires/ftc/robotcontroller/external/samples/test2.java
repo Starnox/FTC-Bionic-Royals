@@ -52,18 +52,17 @@ public class test2 extends OpMode {
     RelicRecoveryVuMark vuMark;
     @Override
     public void init() {
-        initPose();
+       // initPose();
         timp = new ElapsedTime();
         robot =  new HardwarePushbot();
         poz=0;
-
         /*cmp = hardwareMap.get(CompassSensor.class,"cmp");
         cmp.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);*/
         /*ods = hardwareMap.get(OpticalDistanceSensor.class, "ods");
         ods.enableLed(true);*/
         robot.init(hardwareMap);
-        robot.up1.setPosition(0.);
-        robot.up2.setPosition(1);
+        robot.up1.setPosition(v1[0]);
+        robot.up2.setPosition(v2[0]);
         telemetry.addData("Say", "test");
     }
 
@@ -81,7 +80,7 @@ public class test2 extends OpMode {
 
     @Override
     public void loop() {
-        getPose();
+        //getPose();
         double fata = gamepad1.left_stick_x;
         double intoarce = gamepad1.left_stick_y;
         //stanga = fata – intoarce;
@@ -142,16 +141,21 @@ public class test2 extends OpMode {
         }*/
         robot.up1.setPosition(v1[poz]);
         robot.up2.setPosition(v2[poz]);
-        if(gamepad1.a)
+        if(gamepad1.a)//&&robot.mr.getCurrentPosition()<=3200)
+        {
+            robot.mr.setTargetPosition(3200);
             robot.mr.setPower(0.3f);
-        else if(gamepad1.b)
+        }
+        else if(gamepad1.b)//&&robot.mr.getCurrentPosition()>=0)
+        {
+            robot.mr.setTargetPosition(0);
             robot.mr.setPower(-0.3f);
-        else  robot.mr.setPower(0);
+        }
+        //else  robot.mr.setPower(0);
         telemetry.addData("Pos1:",robot.up1.getPosition());
         telemetry.addData("Pos2:",robot.up2.getPosition());
         telemetry.addData("Poz::",poz);
-
-        telemetry.addData("Pose:",vuMark);
+        telemetry.addData("encoder_motor:",robot.mr.getCurrentPosition());
        // OpticalDistanceSensor();
        // CompassSensor();
         //GyroSensor();
