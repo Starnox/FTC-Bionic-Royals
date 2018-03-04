@@ -29,8 +29,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 /**
  * Created by Alex on 1/10/2018.
  */
-@Autonomous(name="autonomie_encoders", group="Linear Opmode")
-public class autonomie_encoders extends LinearOpMode {
+@Autonomous(name="rosu_1", group="Linear Opmode")
+public class rosu_1 extends LinearOpMode {
     private HardwarePushbot robot;
     public static float mers=35.29411f,rotit=14.0005f;
     float v1[]={0.71f,0.56f,0f},v2[]={0.29f,0.44f,1f},dist[]={8.5f,27.5f,46.5f};
@@ -57,7 +57,7 @@ public class autonomie_encoders extends LinearOpMode {
         robot.mfr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.mbl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.mbr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            while (opModeIsActive())
+        while (opModeIsActive())
         {
             getTarget();
             push_blue();
@@ -70,7 +70,7 @@ public class autonomie_encoders extends LinearOpMode {
             move_back(10);
             stop();
         }
-        }
+    }
 
     void push_blue()
     {
