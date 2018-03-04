@@ -19,7 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 /**
  * Created by Alex on 1/10/2018.
  */
-@Autonomous(name="autonomie_encders", group="Linear Opmode")
+@Autonomous(name="autonomie_encoders", group="Linear Opmode")
 public class autonomie_encoders extends LinearOpMode {
     private HardwarePushbot robot;
     public static float mers=35.29411f,rotit=14.0005f;
