@@ -46,14 +46,14 @@ public class autonomie_encoders extends LinearOpMode {
             telemetry.addData("MBR:",robot.mbr.getCurrentPosition());
             telemetry.update();
             push_red();
-            move_front(79);
+            move_front(46.5f);
             rotate_left(90);
-            //up();
             setpoz(2);
-           // down();
             move_back(20);
             move_front(15);
             setpoz(1);
+            move_front(50);
+            rotate_right(360);
             stop();
         }
         }
@@ -64,23 +64,11 @@ public class autonomie_encoders extends LinearOpMode {
         sleep(2000);
         if(robot.sc.red()>robot.sc.blue())
         {
-            telemetry.addData("ROSU:",robot.sc.red() + " " + robot.sc.blue());
-            telemetry.update();
-            move_front(4.5f);
-            move_back(10f);
-            sleep(1000);
-            robot.sb.setPosition(0.1f);
-            sleep(1000);
+            push_front();
         }
         else
         {
-            telemetry.addData("ALBASTRU:",robot.sc.red() + " " + robot.sc.blue());
-            telemetry.update();
-            move_back(10f);
-            move_front(4.5f);
-            sleep(1000);
-            robot.sb.setPosition(0.1f);
-            sleep(1000);
+            push_back();
         }
     }
 
@@ -90,24 +78,11 @@ public class autonomie_encoders extends LinearOpMode {
         sleep(2000);
         if(robot.sc.red()<robot.sc.blue())
         {
-            telemetry.addData("ALBASTRU:",robot.sc.red() + " " + robot.sc.blue());
-            telemetry.update();
-            move_front(4.5f);
-            move_back(7f);
-            sleep(1000);
-            robot.sb.setPosition(0.1f);
-            sleep(1000);
+            push_front();
         }
         else
         {
-            telemetry.addData("ROSU:",robot.sc.red() + " " + robot.sc.blue());
-            telemetry.update();
-            move_back(10f);
-            move_front(4.5f);
-            sleep(1000);
-            robot.sb.setPosition(0.1f);
-            sleep(1000);
-            move_front(5f);
+            push_back();
         }
     }
 
@@ -123,11 +98,6 @@ public class autonomie_encoders extends LinearOpMode {
         robot.mfl.setPower(0.5f);
         while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
         {
-            telemetry.addData("MFL:",robot.mfl.getCurrentPosition());
-            telemetry.addData("MFR:",robot.mfr.getCurrentPosition());
-            telemetry.addData("MBL:",robot.mbl.getCurrentPosition());
-            telemetry.addData("MBR:",robot.mbr.getCurrentPosition());
-            telemetry.update();
         }
     }
 
@@ -143,11 +113,6 @@ public class autonomie_encoders extends LinearOpMode {
         robot.mfl.setPower(0.5f);
         while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
         {
-            telemetry.addData("MFL:",robot.mfl.getCurrentPosition());
-            telemetry.addData("MFR:",robot.mfr.getCurrentPosition());
-            telemetry.addData("MBL:",robot.mbl.getCurrentPosition());
-            telemetry.addData("MBR:",robot.mbr.getCurrentPosition());
-            telemetry.update();
         }
     }
 
@@ -163,11 +128,6 @@ public class autonomie_encoders extends LinearOpMode {
         robot.mfl.setPower(0.5f);
         while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
         {
-            telemetry.addData("MFL:",robot.mfl.getCurrentPosition());
-            telemetry.addData("MFR:",robot.mfr.getCurrentPosition());
-            telemetry.addData("MBL:",robot.mbl.getCurrentPosition());
-            telemetry.addData("MBR:",robot.mbr.getCurrentPosition());
-            telemetry.update();
         }
     }
     public void rotate_right(float x)
@@ -182,11 +142,6 @@ public class autonomie_encoders extends LinearOpMode {
         robot.mfl.setPower(0.5f);
         while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
         {
-            telemetry.addData("MFL:",robot.mfl.getCurrentPosition());
-            telemetry.addData("MFR:",robot.mfr.getCurrentPosition());
-            telemetry.addData("MBL:",robot.mbl.getCurrentPosition());
-            telemetry.addData("MBR:",robot.mbr.getCurrentPosition());
-            telemetry.update();
         }
     }
     void balance_fata(int x)
@@ -235,6 +190,52 @@ public class autonomie_encoders extends LinearOpMode {
         robot.up2.setPosition(v2[poz]);
         sleep(1000);
     }
+    void push_front()
+    {
+        robot.sb.setPosition(1f);
+        sleep(2000);
+        balance_front(1750);
+        robot.sb.setPosition(0.1f);
+        sleep(2000);
+    }
+    void push_back()
+    {
+        robot.sb.setPosition(1f);
+        sleep(2000);
+        balance_back(800);
+        robot.sb.setPosition(0.1f);
+        sleep(2000);
+        balance_front(2520);
+    }
+    public void balance_front(float x)
+    {
+        robot.mbl.setTargetPosition((int)(robot.mbl.getCurrentPosition()-x));
+        robot.mbr.setTargetPosition((int)(robot.mbr.getCurrentPosition()-x));
+        robot.mfr.setTargetPosition((int)(robot.mfr.getCurrentPosition()-x));
+        robot.mfl.setTargetPosition((int)(robot.mfl.getCurrentPosition()-x));
+        robot.mbl.setPower(0.5f);
+        robot.mbr.setPower(0.5f);
+        robot.mfr.setPower(0.5f);
+        robot.mfl.setPower(0.5f);
+        while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
+        {
+        }
+    }
 
+    public void balance_back(float x)
+    {
+        robot.mbl.setTargetPosition((int)(robot.mbl.getCurrentPosition()+x));
+        robot.mbr.setTargetPosition((int)(robot.mbr.getCurrentPosition()+x));
+        robot.mfr.setTargetPosition((int)(robot.mfr.getCurrentPosition()+x));
+        robot.mfl.setTargetPosition((int)(robot.mfl.getCurrentPosition()+x));
+        robot.mbl.setPower(0.5f);
+        robot.mbr.setPower(0.5f);
+        robot.mfr.setPower(0.5f);
+        robot.mfl.setPower(0.5f);
+        while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
+        {
+
+        }
+    }
 }
 

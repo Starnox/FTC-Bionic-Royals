@@ -29,8 +29,15 @@ public class balancing extends LinearOpMode {
         robot.init(hardwareMap);
         x=0;
         y=0;
-        robot.sb.setPosition(1f);
+        robot.mfl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.mfr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.mbl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.mbr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         waitForStart();
+        robot.mfl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.mfr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.mbl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.mbr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         while (opModeIsActive())
         {
             if (gamepad1.dpad_up)
@@ -49,9 +56,9 @@ public class balancing extends LinearOpMode {
             {
                 if (!ok) {
                     if (dir == 1)
-                        go_1();
+                        push_front();
                     else
-                        go_2();
+                        push_back();
                     ok = true;
                 }
             } else ok = false;
@@ -61,51 +68,51 @@ public class balancing extends LinearOpMode {
             telemetry.update();
         }
     }
-    void go_1()
+    void push_front()
     {
-        robot.mbl.setPower(-0.5f);
-        robot.mbr.setPower(-0.5f);
-        robot.mfr.setPower(-0.5f);
-        robot.mfl.setPower(-0.5f);
-        sleep(x/1000);
-        robot.mbl.setPower(0);
-        robot.mbr.setPower(0);
-        robot.mfr.setPower(0);
-        robot.mfl.setPower(0);
-        sleep(500);
-        robot.mbl.setPower(0.5f);
-        robot.mbr.setPower(0.5f);
-        robot.mfr.setPower(0.5f);
-        robot.mfl.setPower(0.5f);
-        sleep(y/1000);
-        robot.mbl.setPower(0);
-        robot.mbr.setPower(0);
-        robot.mfr.setPower(0);
-        robot.mfl.setPower(0);
-        sleep(500);
+        robot.sb.setPosition(1f);
+        sleep(2000);
+        balance_front((int)x/1000);
+        robot.sb.setPosition(0.1f);
+        sleep(2000);
     }
-    void go_2()
+    void push_back()
     {
+        robot.sb.setPosition(1f);
+        sleep(2000);
+        balance_back((int)y/1000);
+        robot.sb.setPosition(0.1f);
+        sleep(2000);
+        balance_front((int)x/1000);
+    }
+    public void balance_front(float x)
+    {
+        robot.mbl.setTargetPosition((int)(robot.mbl.getCurrentPosition()-x));
+        robot.mbr.setTargetPosition((int)(robot.mbr.getCurrentPosition()-x));
+        robot.mfr.setTargetPosition((int)(robot.mfr.getCurrentPosition()-x));
+        robot.mfl.setTargetPosition((int)(robot.mfl.getCurrentPosition()-x));
         robot.mbl.setPower(0.5f);
         robot.mbr.setPower(0.5f);
         robot.mfr.setPower(0.5f);
         robot.mfl.setPower(0.5f);
-        sleep(y/1000);
-        robot.mbl.setPower(0);
-        robot.mbr.setPower(0);
-        robot.mfr.setPower(0);
-        robot.mfl.setPower(0);
-        sleep(500);
-        robot.mbl.setPower(-0.5f);
-        robot.mbr.setPower(-0.5f);
-        robot.mfr.setPower(-0.5f);
-        robot.mfl.setPower(-0.5f);
-        sleep(x/1000);
-        robot.mbl.setPower(0);
-        robot.mbr.setPower(0);
-        robot.mfr.setPower(0);
-        robot.mfl.setPower(0);
-        sleep(500);
+        while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
+        {
+        }
     }
 
+    public void balance_back(float x)
+    {
+        robot.mbl.setTargetPosition((int)(robot.mbl.getCurrentPosition()+x));
+        robot.mbr.setTargetPosition((int)(robot.mbr.getCurrentPosition()+x));
+        robot.mfr.setTargetPosition((int)(robot.mfr.getCurrentPosition()+x));
+        robot.mfl.setTargetPosition((int)(robot.mfl.getCurrentPosition()+x));
+        robot.mbl.setPower(0.5f);
+        robot.mbr.setPower(0.5f);
+        robot.mfr.setPower(0.5f);
+        robot.mfl.setPower(0.5f);
+        while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
+        {
+
+        }
+    }
 }
