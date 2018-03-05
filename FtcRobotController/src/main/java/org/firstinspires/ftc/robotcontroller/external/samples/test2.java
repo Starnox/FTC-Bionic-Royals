@@ -80,24 +80,11 @@ public class test2 extends OpMode {
 
     @Override
     public void loop() {
-        //getPose();
-        double fata = gamepad1.left_stick_x;
-        double intoarce = gamepad1.left_stick_y;
-        //stanga = fata – intoarce;
-        //dreapta = fata + intoarce;
-        if (fata != 0 || intoarce != 0) {
-            //dreapta
-            robot.mfr.setPower((gamepad1.left_stick_y + gamepad1.left_stick_x / 2)/2);
-            robot.mbr.setPower((gamepad1.left_stick_x + gamepad1.left_stick_y / 2)/2);
-            //stanga
-            robot.mfl.setPower((gamepad1.left_stick_y - gamepad1.left_stick_x / 2)/2);
-           robot.mbl.setPower((gamepad1.left_stick_y - gamepad1.left_stick_x / 2)/2);
-        } if(fata == 0 && intoarce == 0){
-            robot.mfl.setPower(0);
-            robot.mfr.setPower(0);
-            robot.mbl.setPower(0);
-            robot.mbr.setPower(0);
-        }
+            robot.mfl.setPower(-gamepad1.left_stick_x - gamepad1.left_stick_y);
+            robot.mbl.setPower(-gamepad1.left_stick_x - gamepad1.left_stick_y);
+            robot.mfr.setPower(-gamepad1.left_stick_x + gamepad1.left_stick_y);
+            robot.mbr.setPower(-gamepad1.left_stick_x + gamepad1.left_stick_y);
+
         if(gamepad1.x)
             robot.sb.setPosition(0.8);
         if(gamepad1.y)
