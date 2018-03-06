@@ -33,7 +33,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 public class albastru_2 extends LinearOpMode {
     private HardwarePushbot robot;
     public static float mers=35.29411f,rotit=14.0005f;
-    float v1[]={0.71f,0.56f,0f},v2[]={0.29f,0.44f,1f},dist[]={46.5f,27.5f,8.5f};
+    float v1[]={0.64f,0.5f,0f},v2[]={0.36f,0.5f,1f},dist[]={46.5f,27.5f,8.5f};
     int target;
     VuforiaLocalizer vuforia;
     OpenGLMatrix pose;

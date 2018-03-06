@@ -42,7 +42,7 @@ public class test2 extends OpMode {
     private HardwarePushbot robot;
    // private CompassSensor cmp;
     int poz=0;
-    float v1[]={0.71f,0.56f,0f},v2[]={0.29f,0.44f,1f};
+    float v1[]={0.64f,0.5f,0f},v2[]={0.36f,0.5f,1f};
     VuforiaLocalizer vuforia;
     OpenGLMatrix pose;
     int cameraMonitorViewId;
@@ -52,7 +52,6 @@ public class test2 extends OpMode {
     RelicRecoveryVuMark vuMark;
     @Override
     public void init() {
-       // initPose();
         timp = new ElapsedTime();
         robot =  new HardwarePushbot();
         poz=0;
@@ -80,24 +79,14 @@ public class test2 extends OpMode {
 
     @Override
     public void loop() {
-        getPose();
-        double fata = gamepad1.left_stick_x;
-        double intoarce = gamepad1.left_stick_y;
-        //stanga = fata – intoarce;
-        //dreapta = fata + intoarce;
-        if (fata != 0 || intoarce != 0) {
-            //dreapta
-            robot.mfr.setPower((gamepad1.left_stick_y + gamepad1.left_stick_x / 2)/2);
-            robot.mbr.setPower((gamepad1.left_stick_x + gamepad1.left_stick_y / 2)/2);
-            //stanga
-            robot.mfl.setPower((gamepad1.left_stick_y - gamepad1.left_stick_x / 2)/2);
-           robot.mbl.setPower((gamepad1.left_stick_y - gamepad1.left_stick_x / 2)/2);
-        } if(fata == 0 && intoarce == 0){
-            robot.mfl.setPower(0);
-            robot.mfr.setPower(0);
-            robot.mbl.setPower(0);
-            robot.mbr.setPower(0);
-        }
+        /*robot.mfr.setPower(gamepad1.left_stick_y/2);
+        robot.mbr.setPower(gamepad1.left_stick_y/2);
+        robot.mfl.setPower(gamepad1.right_stick_y/2);
+        robot.mbl.setPower(gamepad1.right_stick_y/2);*/
+        robot.mfr.setPower((gamepad1.left_stick_y+gamepad1.left_stick_x)/2.5f);
+        robot.mbr.setPower((gamepad1.left_stick_y+gamepad1.left_stick_x)/2.5f);
+        robot.mfl.setPower((gamepad1.left_stick_y-gamepad1.left_stick_x)/2.5f);
+        robot.mbl.setPower((gamepad1.left_stick_y-gamepad1.left_stick_x)/2.5f);
         if(gamepad1.x)
             robot.sb.setPosition(0.8);
         if(gamepad1.y)
@@ -118,9 +107,19 @@ public class test2 extends OpMode {
             robot.mcr.setPower(0);
         }
         if(gamepad1.right_bumper)
-            robot.sf.setPosition(Math.min(1,robot.sf.getPosition()+0.05));
+        {
+          /*  robot.sf1.setPosition(robot.sf1.getPosition()+0.05);
+            robot.sf2.setPosition(robot.sf2.getPosition()-0.05);*/
+          robot.sf1.setPosition(0);
+          robot.sf2.setPosition(1);
+        }
         else if(gamepad1.left_bumper)
-            robot.sf.setPosition(Math.max(0,robot.sf.getPosition()-0.05));
+        {
+            /*robot.sf1.setPosition(robot.sf1.getPosition()-0.05);
+            robot.sf2.setPosition(robot.sf2.getPosition()+0.05);*/
+            robot.sf1.setPosition(1);
+            robot.sf2.setPosition(0);
+        }
 
         if( gamepad1.dpad_up)
             poz = 2;
@@ -129,7 +128,7 @@ public class test2 extends OpMode {
         else if(gamepad1.dpad_right)
             poz = 1;
 
-       /* if(gamepad1.dpad_up)
+        /*if(gamepad1.dpad_up)
         {
             robot.up1.setPosition(robot.up1.getPosition()+0.01);
             robot.up2.setPosition(robot.up2.getPosition()-0.01);

@@ -67,7 +67,8 @@ public class HardwarePushbot
     public DcMotor mcl = null;
     public DcMotor mr = null;
     public Servo  sb = null;
-    public Servo  sf = null;
+    public Servo  sf1 = null;
+    public Servo  sf2 = null;
     public Servo up1=null;
     public Servo up2=null;
     public ColorSensor sc=null;
@@ -130,9 +131,10 @@ public class HardwarePushbot
         // Define and initialize ALL installed servos.
         sb  = hwMap.get(Servo.class, "sb");
         sb.setPosition(0.1);
-        sf = hwMap.get(Servo.class,"sf");
-        sf.setPosition(1);
-
+        sf1 = hwMap.get(Servo.class,"sf1");
+        sf1.setPosition(1);
+        sf2 = hwMap.get(Servo.class,"sf2");
+        sf2.setPosition(0);
         up1= hwMap.get(Servo.class,"up1");
        // up1.setPosition(0.63);
         up2= hwMap.get(Servo.class,"up2");
