@@ -106,14 +106,14 @@ public class test2 extends OpMode {
             robot.mcl.setPower(0);
             robot.mcr.setPower(0);
         }
-        if(gamepad1.right_bumper)
+        if(gamepad1.left_bumper)
         {
           /*  robot.sf1.setPosition(robot.sf1.getPosition()+0.05);
             robot.sf2.setPosition(robot.sf2.getPosition()-0.05);*/
           robot.sf1.setPosition(0);
           robot.sf2.setPosition(1);
         }
-        else if(gamepad1.left_bumper)
+        else if(gamepad1.right_bumper&&robot.mr.isBusy()==false)
         {
             /*robot.sf1.setPosition(robot.sf1.getPosition()-0.05);
             robot.sf2.setPosition(robot.sf2.getPosition()+0.05);*/
@@ -142,11 +142,15 @@ public class test2 extends OpMode {
         robot.up2.setPosition(v2[poz]);
         if(gamepad1.a)//&&robot.mr.getCurrentPosition()<=3200)
         {
+            robot.sf1.setPosition(0.85);
+            robot.sf2.setPosition(0.15);
             robot.mr.setTargetPosition(3200);
             robot.mr.setPower(0.3f);
         }
         else if(gamepad1.b)//&&robot.mr.getCurrentPosition()>=0)
         {
+            robot.sf1.setPosition(0.85);
+            robot.sf2.setPosition(0.15);
             robot.mr.setTargetPosition(0);
             robot.mr.setPower(-0.3f);
         }

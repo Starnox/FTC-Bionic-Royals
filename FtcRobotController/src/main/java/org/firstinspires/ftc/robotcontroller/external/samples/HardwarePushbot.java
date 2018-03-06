@@ -132,9 +132,9 @@ public class HardwarePushbot
         sb  = hwMap.get(Servo.class, "sb");
         sb.setPosition(0.1);
         sf1 = hwMap.get(Servo.class,"sf1");
-        sf1.setPosition(1);
+        sf1.setPosition(0.85);
         sf2 = hwMap.get(Servo.class,"sf2");
-        sf2.setPosition(0);
+        sf2.setPosition(0.15);
         up1= hwMap.get(Servo.class,"up1");
        // up1.setPosition(0.63);
         up2= hwMap.get(Servo.class,"up2");
