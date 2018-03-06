@@ -80,7 +80,7 @@ public class test2 extends OpMode {
 
     @Override
     public void loop() {
-        //getPose();
+        getPose();
         double fata = gamepad1.left_stick_x;
         double intoarce = gamepad1.left_stick_y;
         //stanga = fata – intoarce;
@@ -159,7 +159,7 @@ public class test2 extends OpMode {
        // OpticalDistanceSensor();
        // CompassSensor();
         //GyroSensor();
-
+        telemetry.addData("relic:",vuMark);
         telemetry.update();
     }
 

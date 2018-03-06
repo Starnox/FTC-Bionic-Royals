@@ -60,6 +60,7 @@ public class albastru_1 extends LinearOpMode {
         while (opModeIsActive())
         {
             getTarget();
+            telemetry.addData("target:",target);
             push_red();
             move_back(dist[target]);
             rotate_left(90);
@@ -67,7 +68,7 @@ public class albastru_1 extends LinearOpMode {
             move_back(20);
             move_front(15);
             setpoz(1);
-            move_back(10);
+            move_back(6);
             stop();
         }
     }
@@ -92,11 +93,11 @@ public class albastru_1 extends LinearOpMode {
         sleep(2000);
         if(robot.sc.red()<robot.sc.blue())
         {
-            push_front2();
+            push_back2();
         }
         else
         {
-            push_back2();
+            push_front2();
         }
     }
 
@@ -257,9 +258,6 @@ public class albastru_1 extends LinearOpMode {
         relicTemplate = relicTrackables.get(0);
         relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
 
-        telemetry.addData(">", "Press Play to start");
-        telemetry.update();
-
         relicTrackables.activate();
     }
 
@@ -267,28 +265,15 @@ public class albastru_1 extends LinearOpMode {
     void getPose() {
 
         vuMark = RelicRecoveryVuMark.from(relicTemplate);
-        if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
-            pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
-            if (pose != null) {
-                VectorF trans = pose.getTranslation();
-                Orientation rot = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
-
-                double tX = trans.get(0);
-                double tY = trans.get(1);
-                double tZ = trans.get(2);
-
-                double rX = rot.firstAngle;
-                double rY = rot.secondAngle;
-                double rZ = rot.thirdAngle;
-            }
-        }
     }
 
     void getTarget()
     {
         getPose();
-        while (vuMark == RelicRecoveryVuMark.UNKNOWN&&time<=5000)
+        while (vuMark == RelicRecoveryVuMark.UNKNOWN)
         {
+            telemetry.addData("relic:",vuMark);
+            telemetry.update();
             getPose();
         }
         switch (vuMark)

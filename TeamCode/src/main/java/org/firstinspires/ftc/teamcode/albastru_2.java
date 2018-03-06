@@ -60,6 +60,7 @@ public class albastru_2 extends LinearOpMode {
         while (opModeIsActive())
         {
             getTarget();
+            telemetry.addData("target:",target);
             push_red();
             rotate_right(90);
             move_back(dist[target]);
@@ -68,7 +69,7 @@ public class albastru_2 extends LinearOpMode {
             move_back(20);
             move_front(15);
             setpoz(1);
-            move_back(10);
+            move_back(6);
             stop();
         }
     }
@@ -268,21 +269,6 @@ public class albastru_2 extends LinearOpMode {
     void getPose() {
 
         vuMark = RelicRecoveryVuMark.from(relicTemplate);
-        if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
-            pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
-            if (pose != null) {
-                VectorF trans = pose.getTranslation();
-                Orientation rot = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
-
-                double tX = trans.get(0);
-                double tY = trans.get(1);
-                double tZ = trans.get(2);
-
-                double rX = rot.firstAngle;
-                double rY = rot.secondAngle;
-                double rZ = rot.thirdAngle;
-            }
-        }
     }
 
     void getTarget()
@@ -290,6 +276,8 @@ public class albastru_2 extends LinearOpMode {
         getPose();
         while (vuMark == RelicRecoveryVuMark.UNKNOWN&&time<=5000)
         {
+            telemetry.addData("relic:",vuMark);
+            telemetry.update();
             getPose();
         }
         switch (vuMark)
