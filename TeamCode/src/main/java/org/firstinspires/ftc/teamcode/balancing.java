@@ -23,6 +23,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 public class balancing extends LinearOpMode {
     private HardwarePushbot robot;
     private int dir,x,y;
+    public static float rotit=14.0005f;
     private boolean ok=false;
     public void runOpMode() {
         robot = new HardwarePushbot();
@@ -70,20 +71,32 @@ public class balancing extends LinearOpMode {
     }
     void push_front()
     {
-        robot.sb.setPosition(1f);
+        /*robot.sb.setPosition(1f);
         sleep(2000);
         balance_front((int)x/1000);
         robot.sb.setPosition(0.1f);
-        sleep(2000);
+        sleep(2000);*/
+        robot.sb.setPosition(1f);
+        sleep(1000);
+        rotate_right((int)x/1000);
+        rotate_left((int)x/1000);
+        robot.sb.setPosition(0.1f);
+        sleep(1000);
     }
     void push_back()
     {
-        robot.sb.setPosition(1f);
+        /*robot.sb.setPosition(1f);
         sleep(2000);
         balance_back((int)y/1000);
         robot.sb.setPosition(0.1f);
         sleep(2000);
-        balance_front((int)x/1000);
+        balance_front((int)x/1000);*/
+        robot.sb.setPosition(1f);
+        sleep(1000);
+        rotate_left((int)x/1000);
+        rotate_right((int)x/1000);
+        robot.sb.setPosition(0.1f);
+        sleep(1000);
     }
     public void balance_front(float x)
     {
@@ -113,6 +126,34 @@ public class balancing extends LinearOpMode {
         while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
         {
 
+        }
+    }
+    void rotate_left(float x)
+    {
+        robot.mbl.setTargetPosition((int)(robot.mbl.getCurrentPosition()+x*rotit));
+        robot.mbr.setTargetPosition((int)(robot.mbr.getCurrentPosition()-x*rotit));
+        robot.mfr.setTargetPosition((int)(robot.mfr.getCurrentPosition()-x*rotit));
+        robot.mfl.setTargetPosition((int)(robot.mfl.getCurrentPosition()+x*rotit));
+        robot.mbl.setPower(0.2f);
+        robot.mbr.setPower(0.2f);
+        robot.mfr.setPower(0.2f);
+        robot.mfl.setPower(0.2f);
+        while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
+        {
+        }
+    }
+    void rotate_right(float x)
+    {
+        robot.mbl.setTargetPosition((int)(robot.mbl.getCurrentPosition()-x*rotit));
+        robot.mbr.setTargetPosition((int)(robot.mbr.getCurrentPosition()+x*rotit));
+        robot.mfr.setTargetPosition((int)(robot.mfr.getCurrentPosition()+x*rotit));
+        robot.mfl.setTargetPosition((int)(robot.mfl.getCurrentPosition()-x*rotit));
+        robot.mbl.setPower(0.2f);
+        robot.mbr.setPower(0.2f);
+        robot.mfr.setPower(0.2f);
+        robot.mfl.setPower(0.2f);
+        while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
+        {
         }
     }
 }
