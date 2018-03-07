@@ -64,7 +64,9 @@ public class rosu_2 extends LinearOpMode {
             push_blue();
             move_front(10);
             rotate_left(90);
+            if(dist[target]>=0)
             move_front(dist[target]);
+            else move_back(-dist[target]);
             rotate_left(90);
             setpoz(2);
             move_back(20);
@@ -81,12 +83,13 @@ public class rosu_2 extends LinearOpMode {
         sleep(2000);
         if(robot.sc.red()>robot.sc.blue())
         {
-            push_front1();
+            push_front();
         }
         else
         {
-            push_back1();
+            push_back();
         }
+        balance_front(1750);
     }
 
     void push_red()
@@ -95,11 +98,11 @@ public class rosu_2 extends LinearOpMode {
         sleep(2000);
         if(robot.sc.red()<robot.sc.blue())
         {
-            push_front2();
+            push_front();
         }
         else
         {
-            push_back2();
+            push_back();
         }
     }
 
@@ -181,24 +184,21 @@ public class rosu_2 extends LinearOpMode {
         robot.up2.setPosition(v2[poz]);
         sleep(1000);
     }
-    void push_front1()
+    void push_front()
     {
-        robot.sb.setPosition(1f);
-        sleep(2000);
-        balance_front(1750);
+        rotate_right(15);
+        rotate_left(15);
         robot.sb.setPosition(0.1f);
-        sleep(2000);
+        sleep(1000);
     }
-    void push_back1()
+    void push_back()
     {
-        robot.sb.setPosition(1f);
-        sleep(2000);
-        balance_back(800);
+        rotate_left(15);
+        rotate_right(15);
         robot.sb.setPosition(0.1f);
-        sleep(2000);
-        balance_front(2520);
+        sleep(1000);
     }
-    void push_front2()
+    /*void push_front2()
     {
         robot.sb.setPosition(1f);
         sleep(2000);
@@ -214,7 +214,7 @@ public class rosu_2 extends LinearOpMode {
         robot.sb.setPosition(0.1f);
         sleep(2000);
         balance_back(2520);
-    }
+    }*/
     void balance_front(float x)
     {
         robot.mbl.setTargetPosition((int)(robot.mbl.getCurrentPosition()-x));
