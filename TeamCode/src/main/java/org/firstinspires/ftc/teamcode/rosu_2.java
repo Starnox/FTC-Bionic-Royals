@@ -33,7 +33,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 public class rosu_2 extends LinearOpMode {
     private HardwarePushbot robot;
     public static float mers=35.29411f,rotit=14.0005f;
-    float v1[]={0.64f,0.5f,0f},v2[]={0.36f,0.5f,1f},dist[]={8.5f,27.5f,46.5f};
+    float v1[]={0.64f,0.5f,0f},v2[]={0.36f,0.5f,1f},dist[]={0.5f,19.5f,37.5f};
     int target;
     VuforiaLocalizer vuforia;
     OpenGLMatrix pose;
@@ -63,13 +63,13 @@ public class rosu_2 extends LinearOpMode {
             telemetry.addData("target:",target);
             push_blue();
             move_front(10);
-            rotate_left(90);
+            rotate_left(90,0.5f);
             if(dist[target]>=0)
             move_front(dist[target]);
             else move_back(-dist[target]);
-            rotate_left(90);
+            rotate_left(90,0.5f);
             setpoz(2);
-            move_back(20);
+            move_back(15);
             move_front(15);
             setpoz(1);
             move_back(6);
@@ -136,30 +136,30 @@ public class rosu_2 extends LinearOpMode {
         }
     }
 
-    void rotate_left(float x)
+    void rotate_left(float x,float t)
     {
         robot.mbl.setTargetPosition((int)(robot.mbl.getCurrentPosition()+x*rotit));
         robot.mbr.setTargetPosition((int)(robot.mbr.getCurrentPosition()-x*rotit));
         robot.mfr.setTargetPosition((int)(robot.mfr.getCurrentPosition()-x*rotit));
         robot.mfl.setTargetPosition((int)(robot.mfl.getCurrentPosition()+x*rotit));
-        robot.mbl.setPower(0.5f);
-        robot.mbr.setPower(0.5f);
-        robot.mfr.setPower(0.5f);
-        robot.mfl.setPower(0.5f);
+        robot.mbl.setPower(t);
+        robot.mbr.setPower(t);
+        robot.mfr.setPower(t);
+        robot.mfl.setPower(t);
         while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
         {
         }
     }
-    void rotate_right(float x)
+    void rotate_right(float x,float t)
     {
         robot.mbl.setTargetPosition((int)(robot.mbl.getCurrentPosition()-x*rotit));
         robot.mbr.setTargetPosition((int)(robot.mbr.getCurrentPosition()+x*rotit));
         robot.mfr.setTargetPosition((int)(robot.mfr.getCurrentPosition()+x*rotit));
         robot.mfl.setTargetPosition((int)(robot.mfl.getCurrentPosition()-x*rotit));
-        robot.mbl.setPower(0.5f);
-        robot.mbr.setPower(0.5f);
-        robot.mfr.setPower(0.5f);
-        robot.mfl.setPower(0.5f);
+        robot.mbl.setPower(t);
+        robot.mbr.setPower(t);
+        robot.mfr.setPower(t);
+        robot.mfl.setPower(t);
         while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
         {
         }
@@ -186,15 +186,15 @@ public class rosu_2 extends LinearOpMode {
     }
     void push_front()
     {
-        rotate_right(15);
-        rotate_left(15);
+        rotate_right(15,0.1f);
+        rotate_left(15,0.1f);
         robot.sb.setPosition(0.1f);
         sleep(1000);
     }
     void push_back()
     {
-        rotate_left(15);
-        rotate_right(15);
+        rotate_left(15,0.1f);
+        rotate_right(15,0.1f);
         robot.sb.setPosition(0.1f);
         sleep(1000);
     }

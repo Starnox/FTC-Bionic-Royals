@@ -108,17 +108,13 @@ public class test2 extends OpMode {
         }
         if(gamepad1.left_bumper)
         {
-          /*  robot.sf1.setPosition(robot.sf1.getPosition()+0.05);
-            robot.sf2.setPosition(robot.sf2.getPosition()-0.05);*/
-          robot.sf1.setPosition(0);
-          robot.sf2.setPosition(1);
+            robot.mf.setTargetPosition(Math.max(robot.mf.getCurrentPosition()-25,0));
+            robot.mf.setPower(0.1);
         }
         else if(gamepad1.right_bumper&&robot.mr.isBusy()==false)
         {
-            /*robot.sf1.setPosition(robot.sf1.getPosition()-0.05);
-            robot.sf2.setPosition(robot.sf2.getPosition()+0.05);*/
-            robot.sf1.setPosition(1);
-            robot.sf2.setPosition(0);
+            robot.mf.setTargetPosition(Math.min(robot.mf.getCurrentPosition()+25,605));
+            robot.mf.setPower(0.1);
         }
 
         if( gamepad1.dpad_up)
@@ -142,23 +138,22 @@ public class test2 extends OpMode {
         robot.up2.setPosition(v2[poz]);
         if(gamepad1.a)//&&robot.mr.getCurrentPosition()<=3200)
         {
-            robot.sf1.setPosition(0.85);
-            robot.sf2.setPosition(0.15);
+            if(robot.mf.getCurrentPosition()>560)
+            robot.mf.setTargetPosition(560);
+            robot.mf.setPower(0.1);
             robot.mr.setTargetPosition(3200);
             robot.mr.setPower(0.3f);
         }
         else if(gamepad1.b)//&&robot.mr.getCurrentPosition()>=0)
         {
-            robot.sf1.setPosition(0.85);
-            robot.sf2.setPosition(0.15);
+            if(robot.mf.getCurrentPosition()>560)
+            robot.mf.setTargetPosition(560);
+            robot.mf.setPower(0.1);
             robot.mr.setTargetPosition(0);
             robot.mr.setPower(-0.3f);
         }
         //else  robot.mr.setPower(0);
-        telemetry.addData("Pos1:",robot.up1.getPosition());
-        telemetry.addData("Pos2:",robot.up2.getPosition());
-        telemetry.addData("Poz::",poz);
-        telemetry.addData("encoder_motor:",robot.mr.getCurrentPosition());
+        telemetry.addData("encoder_motor:",robot.mf.getCurrentPosition());
        // OpticalDistanceSensor();
        // CompassSensor();
         //GyroSensor();
@@ -242,4 +237,9 @@ public class test2 extends OpMode {
         String toPrint = df.format(av.xRotationRate) + " " + df.format(av.yRotationRate) + " " + df.format(av.zRotationRate);
         telemetry.addData("Gyro:", toPrint);
     }*/
+   //29.5
+    //40.5
+
+    // 4.75 -- 20
+    // 5. 25 -- 30
 }

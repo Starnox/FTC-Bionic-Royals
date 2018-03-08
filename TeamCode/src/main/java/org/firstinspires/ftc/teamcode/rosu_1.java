@@ -64,7 +64,7 @@ public class rosu_1 extends LinearOpMode {
             telemetry.update();
             push_blue();
             move_front(dist[target]);
-            rotate_left(90);
+            rotate_left(90,0.5f);
             setpoz(2);
             move_back(20);
             move_front(15);
@@ -133,30 +133,30 @@ public class rosu_1 extends LinearOpMode {
         }
     }
 
-    void rotate_left(float x)
+    void rotate_left(float x,float t)
     {
         robot.mbl.setTargetPosition((int)(robot.mbl.getCurrentPosition()+x*rotit));
         robot.mbr.setTargetPosition((int)(robot.mbr.getCurrentPosition()-x*rotit));
         robot.mfr.setTargetPosition((int)(robot.mfr.getCurrentPosition()-x*rotit));
         robot.mfl.setTargetPosition((int)(robot.mfl.getCurrentPosition()+x*rotit));
-        robot.mbl.setPower(0.5f);
-        robot.mbr.setPower(0.5f);
-        robot.mfr.setPower(0.5f);
-        robot.mfl.setPower(0.5f);
+        robot.mbl.setPower(t);
+        robot.mbr.setPower(t);
+        robot.mfr.setPower(t);
+        robot.mfl.setPower(t);
         while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
         {
         }
     }
-    void rotate_right(float x)
+    void rotate_right(float x,float t)
     {
         robot.mbl.setTargetPosition((int)(robot.mbl.getCurrentPosition()-x*rotit));
         robot.mbr.setTargetPosition((int)(robot.mbr.getCurrentPosition()+x*rotit));
         robot.mfr.setTargetPosition((int)(robot.mfr.getCurrentPosition()+x*rotit));
         robot.mfl.setTargetPosition((int)(robot.mfl.getCurrentPosition()-x*rotit));
-        robot.mbl.setPower(0.5f);
-        robot.mbr.setPower(0.5f);
-        robot.mfr.setPower(0.5f);
-        robot.mfl.setPower(0.5f);
+        robot.mbl.setPower(t);
+        robot.mbr.setPower(t);
+        robot.mfr.setPower(t);
+        robot.mfl.setPower(t);
         while(robot.mbr.isBusy()||robot.mbl.isBusy()||robot.mfl.isBusy()||robot.mfr.isBusy())
         {
         }
@@ -183,15 +183,15 @@ public class rosu_1 extends LinearOpMode {
     }
     void push_front()
     {
-        rotate_right(15);
-        rotate_left(15);
+        rotate_right(15,0.1f);
+        rotate_left(15,0.1f);
         robot.sb.setPosition(0.1f);
         sleep(1000);
     }
     void push_back()
     {
-        rotate_left(15);
-        rotate_right(15);
+        rotate_left(15,0.1f);
+        rotate_right(15,0.1f);
         robot.sb.setPosition(0.1f);
         sleep(1000);
     }

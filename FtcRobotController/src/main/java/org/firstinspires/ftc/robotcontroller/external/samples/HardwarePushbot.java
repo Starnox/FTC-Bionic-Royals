@@ -66,9 +66,8 @@ public class HardwarePushbot
     public DcMotor mcr = null;
     public DcMotor mcl = null;
     public DcMotor mr = null;
+    public DcMotor mf = null;
     public Servo  sb = null;
-    public Servo  sf1 = null;
-    public Servo  sf2 = null;
     public Servo up1=null;
     public Servo up2=null;
     public ColorSensor sc=null;
@@ -102,6 +101,7 @@ public class HardwarePushbot
         mcr = hwMap.get(DcMotor.class,"mcr");
         mcl = hwMap.get(DcMotor.class,"mcl");
         mr = hwMap.get(DcMotor.class,"mr");
+        mf = hwMap.get(DcMotor.class,"mf");
 
         mfl.setDirection(DcMotor.Direction.FORWARD);
         mfr.setDirection(DcMotor.Direction.REVERSE);
@@ -110,7 +110,7 @@ public class HardwarePushbot
         mcl.setDirection(DcMotor.Direction.REVERSE);
         mcr.setDirection(DcMotor.Direction.FORWARD);
         mr.setDirection(DcMotor.Direction.FORWARD);
-
+        mf.setDirection(DcMotor.Direction.FORWARD);
         // Set all motors to zero power
         mfl.setPower(0);
         mfr.setPower(0);
@@ -119,6 +119,7 @@ public class HardwarePushbot
         mcl.setPower(0);
         mcr.setPower(0);
         mr.setPower(0);
+        mf.setPower(0);
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         mfl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -128,13 +129,12 @@ public class HardwarePushbot
         mcr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         mcl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         mr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        mf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         // Define and initialize ALL installed servos.
         sb  = hwMap.get(Servo.class, "sb");
         sb.setPosition(0.1);
-        sf1 = hwMap.get(Servo.class,"sf1");
-        sf1.setPosition(0.85);
-        sf2 = hwMap.get(Servo.class,"sf2");
-        sf2.setPosition(0.15);
+
         up1= hwMap.get(Servo.class,"up1");
        // up1.setPosition(0.63);
         up2= hwMap.get(Servo.class,"up2");
