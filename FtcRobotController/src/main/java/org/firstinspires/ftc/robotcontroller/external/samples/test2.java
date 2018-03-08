@@ -139,16 +139,20 @@ public class test2 extends OpMode {
         if(gamepad1.a)//&&robot.mr.getCurrentPosition()<=3200)
         {
             if(robot.mf.getCurrentPosition()>560)
-            robot.mf.setTargetPosition(560);
-            robot.mf.setPower(0.1);
+            {
+                robot.mf.setTargetPosition(560);
+                robot.mf.setPower(0.1);
+            }
             robot.mr.setTargetPosition(3200);
             robot.mr.setPower(0.3f);
         }
         else if(gamepad1.b)//&&robot.mr.getCurrentPosition()>=0)
         {
             if(robot.mf.getCurrentPosition()>560)
-            robot.mf.setTargetPosition(560);
-            robot.mf.setPower(0.1);
+            {
+                robot.mf.setTargetPosition(560);
+                robot.mf.setPower(0.1);
+            }
             robot.mr.setTargetPosition(0);
             robot.mr.setPower(-0.3f);
         }
