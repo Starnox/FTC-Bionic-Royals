@@ -50,6 +50,7 @@ public class test2 extends OpMode {
     VuforiaTrackable relicTemplate;
     VuforiaLocalizer.Parameters parameters;
     RelicRecoveryVuMark vuMark;
+
     @Override
     public void init() {
         timp = new ElapsedTime();
@@ -108,21 +109,42 @@ public class test2 extends OpMode {
         }
         if(gamepad1.left_bumper)
         {
-            robot.mf.setTargetPosition(Math.max(robot.mf.getCurrentPosition()-25,0));
-            robot.mf.setPower(0.1);
+            robot.mf.setTargetPosition(Math.max(robot.mf.getCurrentPosition()-75,-560));
+            robot.mf.setPower(1);
         }
-        else if(gamepad1.right_bumper&&robot.mr.isBusy()==false)
+        if(gamepad1.right_bumper&&robot.mr.isBusy()==false)
         {
-            robot.mf.setTargetPosition(Math.min(robot.mf.getCurrentPosition()+25,605));
-            robot.mf.setPower(0.1);
+            robot.mf.setTargetPosition(Math.min(robot.mf.getCurrentPosition()+75,100));
+            robot.mf.setPower(1);
         }
 
         if( gamepad1.dpad_up)
+        {
+            if(robot.mf.getCurrentPosition()>0)
+            {
+                robot.mf.setTargetPosition(0);
+                robot.mf.setPower(1);
+            }
             poz = 2;
+        }
         else if(gamepad1.dpad_down)
+        {
+            if(robot.mf.getCurrentPosition()>0)
+            {
+                robot.mf.setTargetPosition(0);
+                robot.mf.setPower(1);
+            }
             poz = 0;
+        }
         else if(gamepad1.dpad_right)
+        {
+            if(robot.mf.getCurrentPosition()>0)
+            {
+                robot.mf.setTargetPosition(0);
+                robot.mf.setPower(1);
+            }
             poz = 1;
+        }
 
         /*if(gamepad1.dpad_up)
         {
@@ -134,21 +156,28 @@ public class test2 extends OpMode {
             robot.up1.setPosition(robot.up1.getPosition()-0.01);
             robot.up2.setPosition(robot.up2.getPosition()+0.01);
         }*/
-        robot.up1.setPosition(v1[poz]);
-        robot.up2.setPosition(v2[poz]);
+        if(robot.mf.getCurrentPosition()<=0)
+        {
+            robot.up1.setPosition(v1[poz]);
+            robot.up2.setPosition(v2[poz]);
+        }
         if(gamepad1.a)//&&robot.mr.getCurrentPosition()<=3200)
         {
-            if(robot.mf.getCurrentPosition()>560)
-            robot.mf.setTargetPosition(560);
-            robot.mf.setPower(0.1);
+            if(robot.mf.getCurrentPosition()>0)
+            {
+                robot.mf.setTargetPosition(0);
+                robot.mf.setPower(1);
+            }
             robot.mr.setTargetPosition(3200);
             robot.mr.setPower(0.3f);
         }
         else if(gamepad1.b)//&&robot.mr.getCurrentPosition()>=0)
         {
-            if(robot.mf.getCurrentPosition()>560)
-            robot.mf.setTargetPosition(560);
-            robot.mf.setPower(0.1);
+            if(robot.mf.getCurrentPosition()>0)
+            {
+                robot.mf.setTargetPosition(0);
+                robot.mf.setPower(1);
+            }
             robot.mr.setTargetPosition(0);
             robot.mr.setPower(-0.3f);
         }

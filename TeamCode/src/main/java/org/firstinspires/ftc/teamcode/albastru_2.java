@@ -33,7 +33,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 public class albastru_2 extends LinearOpMode {
     private HardwarePushbot robot;
     public static float mers=35.29411f,rotit=14.0005f;
-    float v1[]={0.64f,0.5f,0f},v2[]={0.36f,0.5f,1f},dist[]={93,103,122};
+    float v1[]={0.64f,0.5f,0f},v2[]={0.36f,0.5f,1f},dist[]={49,30,11};
     int target;
     VuforiaLocalizer vuforia;
     OpenGLMatrix pose;
@@ -53,6 +53,7 @@ public class albastru_2 extends LinearOpMode {
         robot.up2.setPosition(v2[1]);
         initPose();
         waitForStart();
+        resetStartTime();
         robot.mfl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.mfr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.mbl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -67,25 +68,11 @@ public class albastru_2 extends LinearOpMode {
             move_back(dist[target]);
             rotate_left(90,0.5f);
             setpoz(2);
-            move_back(10);
-            move_front(10);
+            move_back(20);
+            move_front(15);
             setpoz(1);
             move_back(6);
             stop();
-        }
-    }
-
-    void push_blue()
-    {
-        robot.sb.setPosition(1f);
-        sleep(2000);
-        if(robot.sc.red()>robot.sc.blue())
-        {
-            push_front();
-        }
-        else
-        {
-            push_back();
         }
     }
 
@@ -95,11 +82,11 @@ public class albastru_2 extends LinearOpMode {
         sleep(2000);
         if(robot.sc.red()<robot.sc.blue())
         {
-            push_front();
+            push_back();
         }
         else
         {
-            push_back();
+            push_front();
         }
         balance_back(1750);
     }
@@ -184,16 +171,16 @@ public class albastru_2 extends LinearOpMode {
     }
     void push_front()
     {
-        rotate_right(15,0.5f);
-        rotate_left(15,0.5f);
-        robot.sb.setPosition(0.1f);
+        rotate_right(15,0.2f);
+        rotate_left(15,0.2f);
+        robot.sb.setPosition(0.05f);
         sleep(1000);
     }
     void push_back()
     {
-        rotate_left(15,0.5f);
-        rotate_right(15,0.5f);
-        robot.sb.setPosition(0.1f);
+        rotate_left(15,0.2f);
+        rotate_right(15,0.2f);
+        robot.sb.setPosition(0.05f);
         sleep(1000);
     }
     /* void push_front2()
@@ -275,6 +262,8 @@ public class albastru_2 extends LinearOpMode {
             telemetry.addData("relic:",vuMark);
             telemetry.update();
             getPose();
+            if(getRuntime()>=5)
+                vuMark = RelicRecoveryVuMark.CENTER;
         }
         switch (vuMark)
         {
