@@ -53,6 +53,7 @@ public class rosu_1 extends LinearOpMode {
         robot.up2.setPosition(v2[1]);
         initPose();
         waitForStart();
+        resetStartTime();
         robot.mfl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.mfr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.mbl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -80,28 +81,16 @@ public class rosu_1 extends LinearOpMode {
         sleep(2000);
         if(robot.sc.red()>robot.sc.blue())
         {
-            push_front();
+            push_back();
         }
         else
         {
-            push_back();
+            push_front();
         }
         balance_front(1750);
     }
 
-    void push_red()
-    {
-        robot.sb.setPosition(1f);
-        sleep(2000);
-        if(robot.sc.red()<robot.sc.blue())
-        {
-            push_front();
-        }
-        else
-        {
-            push_back();
-        }
-    }
+
 
     void move_front(float x)
     {
@@ -183,16 +172,16 @@ public class rosu_1 extends LinearOpMode {
     }
     void push_front()
     {
-        rotate_right(15,0.1f);
-        rotate_left(15,0.1f);
-        robot.sb.setPosition(0.1f);
+        rotate_right(15,0.2f);
+        rotate_left(15,0.2f);
+        robot.sb.setPosition(0.05f);
         sleep(1000);
     }
     void push_back()
     {
-        rotate_left(15,0.1f);
-        rotate_right(15,0.1f);
-        robot.sb.setPosition(0.1f);
+        rotate_left(15,0.2f);
+        rotate_right(15,0.2f);
+        robot.sb.setPosition(0.05f);
         sleep(1000);
     }
     /*void push_front2()
@@ -277,6 +266,8 @@ public class rosu_1 extends LinearOpMode {
             telemetry.addData("relic:",vuMark);
             telemetry.update();
             getPose();
+            if(getRuntime()>=5)
+                vuMark = RelicRecoveryVuMark.CENTER;
         }
         switch (vuMark)
         {
