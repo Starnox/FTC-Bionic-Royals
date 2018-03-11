@@ -59,15 +59,7 @@ public class autonomie_encoders extends LinearOpMode {
         robot.mbr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             while (opModeIsActive())
         {
-            getTarget();
-            push_blue();
-            move_front(dist[target]);
-            rotate_left(90);
-            setpoz(2);
-            move_back(20);
-            move_front(15);
-            setpoz(1);
-            move_back(10);
+            find_first();
             stop();
         }
         }
@@ -98,6 +90,29 @@ public class autonomie_encoders extends LinearOpMode {
         {
             push_back2();
         }
+    }
+
+    void find_first()
+    {
+        robot.mfl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.mfr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.mbl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.mbr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.mbl.setPower(-0.5f);
+        robot.mbr.setPower(-0.5f);
+        robot.mfr.setPower(-0.5f);
+        robot.mfl.setPower(-0.5f);
+        while(robot.ods.getLightDetected()<0.5f) {
+            telemetry.addData("DIST:",robot.ods.getLightDetected());
+        }
+        robot.mbl.setPower(0f);
+        robot.mbr.setPower(0f);
+        robot.mfr.setPower(0f);
+        robot.mfl.setPower(0f);
+        robot.mfl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.mfr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.mbl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.mbr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     void move_front(float x)

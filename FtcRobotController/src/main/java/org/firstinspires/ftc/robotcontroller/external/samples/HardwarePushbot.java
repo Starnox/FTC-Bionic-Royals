@@ -35,6 +35,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gyroscope;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoController;
 import com.qualcomm.robotcore.hardware.ServoImpl;
@@ -73,7 +74,7 @@ public class HardwarePushbot
     public ColorSensor sc=null;
     public CompassSensor cmp = null;
     public Gyroscope gyro = null;
-
+    public OpticalDistanceSensor ods=null;
 
     public static final double MID_SERVO       =  0.5 ;
     public static final double ARM_UP_POWER    =  0.45 ;
@@ -142,10 +143,8 @@ public class HardwarePushbot
         //Sensors
         sc= hwMap.get(ColorSensor.class,"sc");
         sc.enableLed(true);
-        cmp = hwMap.get(CompassSensor.class,"cmp");
-        cmp.setMode(CompassSensor.CompassMode.MEASUREMENT_MODE);
-        gyro =  hwMap.get(Gyroscope.class,"gyro");
-
+        ods=hwMap.get(OpticalDistanceSensor.class,"ods");
+        ods.enableLed(true);
     }
  }
 
