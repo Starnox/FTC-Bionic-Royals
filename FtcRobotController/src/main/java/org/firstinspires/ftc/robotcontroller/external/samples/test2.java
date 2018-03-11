@@ -163,20 +163,34 @@ public class test2 extends OpMode {
         }
         if(gamepad1.a)//&&robot.mr.getCurrentPosition()<=3200)
         {
+<<<<<<< HEAD
             if(robot.mf.getCurrentPosition()>0)
             {
                 robot.mf.setTargetPosition(0);
                 robot.mf.setPower(1);
+=======
+            if(robot.mf.getCurrentPosition()>560)
+            {
+                robot.mf.setTargetPosition(560);
+                robot.mf.setPower(0.1);
+>>>>>>> 8ac1ad68ffac514ea0cc381a762735691304fd40
             }
             robot.mr.setTargetPosition(3200);
             robot.mr.setPower(0.3f);
         }
         else if(gamepad1.b)//&&robot.mr.getCurrentPosition()>=0)
         {
+<<<<<<< HEAD
             if(robot.mf.getCurrentPosition()>0)
             {
                 robot.mf.setTargetPosition(0);
                 robot.mf.setPower(1);
+=======
+            if(robot.mf.getCurrentPosition()>560)
+            {
+                robot.mf.setTargetPosition(560);
+                robot.mf.setPower(0.1);
+>>>>>>> 8ac1ad68ffac514ea0cc381a762735691304fd40
             }
             robot.mr.setTargetPosition(0);
             robot.mr.setPower(-0.3f);
